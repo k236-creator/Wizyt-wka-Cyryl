@@ -161,6 +161,20 @@ h1{font-size:clamp(1.22rem,5.4vw,1.55rem);line-height:1.14}
 .btn.main{min-height:72px;font-size:1.12rem}
 .btn.main small{font-size:12.5px;opacity:.8}
 @media (max-height:640px){.savewrap{margin-bottom:10px}.btn.main{min-height:62px}}
+
+/* services button: glowing animated border */
+.btn.site{
+  min-height:58px;justify-content:center;gap:12px;color:#fff;font:700 1.02rem/1.2 Montserrat,Inter,sans-serif;
+  border:1.5px solid transparent;
+  background:linear-gradient(#0d1216,#0d1216) padding-box,
+             linear-gradient(110deg,var(--neon),var(--neon-2),#ffffff,var(--neon-2),var(--neon)) border-box;
+  background-size:100% 100%,300% 100%;
+  box-shadow:0 0 30px -8px rgba(0,242,254,.65),inset 0 0 22px -10px rgba(0,242,254,.5);
+  animation:flow 4s linear infinite}
+.btn.site svg{width:24px;height:24px;stroke:var(--neon)}
+.btn.site:hover{border-color:transparent;box-shadow:0 0 40px -6px rgba(0,242,254,.9),inset 0 0 26px -8px rgba(0,242,254,.7)}
+@keyframes flow{to{background-position:0 0,300% 0}}
+@media (max-height:640px){.btn.site{min-height:50px}}
 </style>
 </head>
 <body>
@@ -221,10 +235,12 @@ h1{font-size:clamp(1.22rem,5.4vw,1.55rem);line-height:1.14}
         <span data-t="call"></span>
       </a>
     </div>
-    <a class="btn site in" style="--i:9" href="https://webdesign-teal-seven.vercel.app" target="_blank" rel="noopener">
+    <div class="in" style="--i:9">
+    <a class="btn site" href="https://webdesign-teal-seven.vercel.app" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
       <span data-t="svc"></span>
     </a>
+    </div>
   </div>
 </main>
 
