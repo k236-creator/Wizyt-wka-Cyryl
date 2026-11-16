@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0c">
+<title>Cyryl WEBDesign | Wizytówka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;800&display=swap"></noscript>
+<style>
+:root{
+  --ink:#0a0a0c; --ink-2:#111116; --neon:#00f2fe; --neon-2:#4facfe; --silver:#c9d1d9;
+  --glass:rgba(255,255,255,.05); --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box;margin:0}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;min-height:100dvh;background:var(--ink);color:#fff;
+  font:400 16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding:max(20px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom));
+}
+h1,h2,.display{font-family:Montserrat,Inter,system-ui,sans-serif;text-wrap:balance}
+
+/* background: dotted web-grid + drifting glow */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.4px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 22%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 55% at 50% 22%,#000,transparent 75%)}
+.glow{position:absolute;border-radius:50%;filter:blur(110px)}
+.g1{width:460px;height:460px;left:-170px;top:-90px;background:rgba(0,242,254,.15);animation:drift 16s ease-in-out infinite alternate}
+.g2{width:420px;height:420px;right:-150px;top:340px;background:rgba(79,172,254,.12);animation:drift 20s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(40px,60px)}}
+
+.wrap{position:relative;z-index:1;max-width:440px;margin:0 auto}
+
+/* language switch */
+.langs{display:flex;justify-content:flex-end;gap:4px}
+.langs button{
+  font:600 12px/1 Montserrat,sans-serif;color:var(--silver);background:var(--glass);border:1px solid var(--line);
+  padding:9px 11px;border-radius:999px;cursor:pointer;min-width:44px;min-height:34px;transition:.25s}
+.langs button[aria-pressed="true"]{color:#04181a;background:linear-gradient(135deg,var(--neon),var(--neon-2));border-color:transparent}
+.langs button:focus-visible,.btn:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+
+/* the card */
+.stage{perspective:900px;margin:22px 0 26px}
+.card{
+  position:relative;aspect-ratio:1.72/1;border-radius:22px;overflow:hidden;padding:20px 22px;
+  background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.02) 55%),#0d1014;
+  border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(0,242,254,.45),0 0 0 1px rgba(0,242,254,.05) inset;
+  transform-style:preserve-3d;transition:transform .25s ease-out;
+  animation:float 6s ease-in-out infinite}
+@keyframes float{50%{translate:0 -6px}}
+.card::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 38%,rgba(0,242,254,.28) 50%,transparent 62%);
+  transform:translateX(-130%);animation:sweep 5.5s 1.2s ease-in-out infinite}
+@keyframes sweep{0%{transform:translateX(-130%)}35%,100%{transform:translateX(130%)}}
+.chip{width:36px;height:27px;border-radius:6px;background:linear-gradient(135deg,#d9e4ea,#8fa3ad);position:relative;opacity:.9}
+.chip::before,.chip::after{content:"";position:absolute;background:rgba(0,0,0,.28)}
+.chip::before{left:0;right:0;top:50%;height:1px}
+.chip::after{top:0;bottom:0;left:38%;width:1px;box-shadow:12px 0 0 rgba(0,0,0,.28)}
+.nfc{position:absolute;right:20px;top:16px;width:52px;height:52px;display:grid;place-items:center}
+.nfc svg{width:24px;height:24px;stroke:var(--neon);fill:none;stroke-width:2;stroke-linecap:round;position:relative}
+.nfc i{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--neon);opacity:0;animation:ring 3s ease-out infinite}
+.nfc i:nth-child(2){animation-delay:1s}.nfc i:nth-child(3){animation-delay:2s}
+@keyframes ring{0%{transform:scale(.35);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+.who{position:absolute;left:22px;bottom:18px}
+.who .display{font-weight:800;font-size:clamp(1.5rem,7vw,1.9rem);line-height:1.05;letter-spacing:-.01em}
+.who .display span{color:var(--neon);text-shadow:0 0 24px rgba(0,242,254,.5)}
+.who small{display:block;margin-top:6px;color:var(--silver);font-size:12.5px;max-width:19ch;line-height:1.35}
+.qr{position:absolute;right:20px;bottom:18px;width:54px;height:54px;border-radius:8px;background:#fff;padding:5px;display:grid;
+  grid-template-columns:repeat(9,1fr);gap:0;opacity:.95}
+.qr b{background:#fff}.qr b.on{background:#0a0a0c}
+
+/* pitch */
+h1{font-weight:800;font-size:clamp(1.55rem,6.4vw,1.95rem);line-height:1.12;letter-spacing:-.015em}
+.sub{margin-top:12px;color:var(--silver);max-width:42ch}
+.list{margin:20px 0 26px;display:grid;gap:12px}
+.item{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(0,242,254,.09);border:1px solid rgba(0,242,254,.25)}
+.ico svg{width:17px;height:17px;stroke:var(--neon);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.item h2{font-size:.98rem;font-weight:600;line-height:1.3}
+.item p{font-size:.9rem;color:var(--silver);margin-top:2px}
+
+/* buttons */
+.actions{display:grid;gap:10px}
+.btn{
+  display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:0 18px;border-radius:16px;
+  color:#fff;text-decoration:none;font:600 15.5px/1.2 Inter,sans-serif;background:var(--glass);border:1px solid var(--line);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;
+  transition:transform .2s ease,border-color .3s ease,box-shadow .3s ease}
+.btn svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.btn:hover{transform:translateY(-2px);border-color:var(--neon);box-shadow:0 0 26px -6px rgba(0,242,254,.5)}
+.btn:active{transform:scale(.98)}
+.btn.main{
+  min-height:76px;border:0;color:#04181a;font-family:Montserrat,sans-serif;font-weight:800;font-size:1.08rem;
+  background:linear-gradient(135deg,var(--neon),var(--neon-2));position:relative;overflow:hidden;
+  box-shadow:0 0 0 0 rgba(0,242,254,.5),0 14px 40px -10px rgba(0,242,254,.7);animation:pulse 2.8s ease-out infinite}
+.btn.main svg{width:28px;height:28px;stroke-width:2.1}
+.btn.main small{display:block;font:500 12.5px/1.2 Inter,sans-serif;opacity:.75;margin-top:3px}
+.btn.main::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);
+  transform:translateX(-120%);animation:shine 3.6s 1s ease-in-out infinite}
+@keyframes shine{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,242,254,.5),0 14px 40px -10px rgba(0,242,254,.7)}
+  70%,100%{box-shadow:0 0 0 16px rgba(0,242,254,0),0 14px 40px -10px rgba(0,242,254,.7)}}
+.btn.main.done{background:linear-gradient(135deg,#34f5a8,#00f2fe);animation:none}
+.btn.main .ck{display:none}.btn.main.done .ck{display:block}.btn.main.done .add{display:none}
+.btn.site{justify-content:center;margin-top:4px;border-color:rgba(0,242,254,.35)}
+.foot{margin-top:22px;text-align:center;font-size:12.5px;color:#7f8893}
+
+/* one orchestrated entrance */
+.in{animation:up .7s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i)*.09s + .05s)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .in{opacity:1;transform:none}
+}
+
+/* one-screen layout */
+body{padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom))}
+.wrap{display:flex;flex-direction:column;min-height:calc(100dvh - 28px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+.langs button{min-height:30px;padding:7px 10px}
+.stage{margin:12px 0}
+.card{aspect-ratio:auto;height:clamp(104px,17dvh,146px);padding:12px 16px}
+.chip{width:30px;height:22px}
+.nfc{right:12px;top:8px;width:44px;height:44px}
+.nfc svg{width:20px;height:20px}
+.who{left:16px;bottom:11px}
+.who .display{font-size:1.28rem;line-height:1.1}
+.who .display br{display:none}
+.who small{margin-top:4px;font-size:11.5px;max-width:none}
+.qr{right:14px;bottom:11px;width:44px;height:44px;padding:4px;border-radius:7px}
+.pitch{margin-bottom:12px}
+h1{font-size:clamp(1.22rem,5.4vw,1.55rem);line-height:1.14}
+.sub{margin-top:8px;font-size:.86rem;line-height:1.4}
+.chips{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:500;
+  background:rgba(0,242,254,.08);border:1px solid rgba(0,242,254,.25)}
+.chips svg{width:14px;height:14px;stroke:var(--neon);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.actions{margin-top:auto;gap:8px}
+.btn.main{min-height:66px}
+.btn.main svg{width:26px;height:26px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.btn.tile{flex-direction:column;justify-content:center;gap:6px;min-height:72px;padding:8px 6px;text-align:center;font-size:12.5px;line-height:1.2}
+.btn.tile svg{width:22px;height:22px}
+.btn.site{min-height:46px;margin-top:0}
+@media (max-height:640px){.sub{display:none}.card{height:96px}}
+
+/* bigger card */
+.card{height:clamp(138px,22dvh,190px);padding:14px 18px}
+.who{left:18px;bottom:13px}
+.who .display{font-size:1.5rem;line-height:1.08}
+.who .display br{display:block}
+.who small{font-size:12px;margin-top:5px}
+.qr{width:52px;height:52px;right:16px;bottom:13px}
+.nfc{right:14px;top:10px}
+@media (max-height:640px){.sub{display:none}.card{height:104px}.who .display br{display:none}.who .display{font-size:1.28rem}}
+
+/* priority save button */
+.savewrap{margin:0 0 14px}
+.btn.main{min-height:72px;font-size:1.12rem}
+.btn.main small{font-size:12.5px;opacity:.8}
+@media (max-height:640px){.savewrap{margin-bottom:10px}.btn.main{min-height:62px}}
+
+/* services button: glowing animated border */
+.btn.site{
+  min-height:58px;justify-content:center;gap:12px;color:#fff;font:700 1.02rem/1.2 Montserrat,Inter,sans-serif;
+  border:1.5px solid transparent;
+  background:linear-gradient(#0d1216,#0d1216) padding-box,
+             linear-gradient(110deg,var(--neon),var(--neon-2),#ffffff,var(--neon-2),var(--neon)) border-box;
+  background-size:100% 100%,300% 100%;
+  box-shadow:0 0 30px -8px rgba(0,242,254,.65),inset 0 0 22px -10px rgba(0,242,254,.5);
+  animation:flow 4s linear infinite}
+.btn.site svg{width:24px;height:24px;stroke:var(--neon)}
+.btn.site:hover{border-color:transparent;box-shadow:0 0 40px -6px rgba(0,242,254,.9),inset 0 0 26px -8px rgba(0,242,254,.7)}
+@keyframes flow{to{background-position:0 0,300% 0}}
+@media (max-height:640px){.btn.site{min-height:50px}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="glow g1"></div><div class="glow g2"></div></div>
+
+<main class="wrap">
+  <nav class="langs in" style="--i:0" aria-label="Language">
+    <button data-l="pl" aria-pressed="true">PL</button>
+    <button data-l="uk" aria-pressed="false">UA</button>
+    <button data-l="ru" aria-pressed="false">RU</button>
+    <button data-l="en" aria-pressed="false">EN</button>
+  </nav>
+
+  <div class="stage in" style="--i:1">
+    <div class="card" id="card">
+      <div class="chip"></div>
+      <div class="nfc" aria-hidden="true"><i></i><i></i><i></i>
+        <svg viewBox="0 0 24 24"><path d="M6 8.5a5 5 0 0 1 0 7M10 6a9 9 0 0 1 0 12M14 3.5a13 13 0 0 1 0 17"/></svg>
+      </div>
+      <div class="who">
+        <div class="display">Cyryl <br><span>WEBDesign</span></div>
+        <small data-t="role"></small>
+      </div>
+      <div class="qr" id="qr" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="in savewrap" style="--i:2">
+    <button class="btn main" id="save" type="button">
+      <svg class="add" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/></svg>
+      <svg class="ck" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+      <span><span data-t="save"></span><small data-t="saveSub"></small></span>
+    </button>
+  </div>
+
+  <div class="pitch">
+    <h1 class="in" style="--i:2" data-t="head"></h1>
+    <p class="sub in" style="--i:3" data-t="sub"></p>
+    <ul class="chips in" style="--i:4">
+      <li><svg viewBox="0 0 24 24"><path d="M6 8.5a5 5 0 0 1 0 7M10 6a9 9 0 0 1 0 12M14 3.5a13 13 0 0 1 0 17"/></svg><span data-t="i1t"></span></li>
+      <li><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></svg><span data-t="i2t"></span></li>
+      <li><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg><span data-t="i3t"></span></li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <div class="row3">
+      <a class="btn tile in" style="--i:6" id="tg" href="https://t.me/crljkb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21.5 3.5L2.8 10.7c-.9.4-.9 1.1-.2 1.3l4.7 1.5 1.8 5.6c.2.6.4.8.9.8s.6-.2 1-.5l2.4-2.3 4.8 3.6c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.2-.4-1.8-1.5-1.3zM8 13.2l9.7-6.1c.5-.3.9-.1.5.2l-8.1 7.3-.3 3.3z"/></svg>
+        <span data-t="tg"></span>
+      </a>
+      <a class="btn tile in" style="--i:7" id="sms" href="#">
+        <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7L3.5 20.5l1.6-5A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>
+        <span data-t="sms"></span>
+      </a>
+      <a class="btn tile in" style="--i:8" id="call" href="tel:+48884724964">
+        <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+        <span data-t="call"></span>
+      </a>
+    </div>
+    <div class="in" style="--i:9">
+    <a class="btn site" href="https://cyrylwebdesign.vercel.app" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <span data-t="svc"></span>
+    </a>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var PHONE = '+48884724964', TG = 'https://t.me/crljkb', SITE = 'https://cyrylwebdesign.vercel.app';
+  var D = {
+    pl: {
+      role: 'Strony www, NFC wizytówki, kody QR',
+      head: 'Jedno dotknięcie telefonem, a klient jest u Ciebie.',
+      sub: 'Robię NFC wizytówki, kody QR, menu cyfrowe i strony internetowe, które zamieniają przechodniów w klientów.',
+      i1t: 'NFC wizytówki', i1d: 'Przykładasz telefon i kontakt, strona oraz opinie otwierają się same.',
+      i2t: 'Kody QR i opinie', i2d: 'Dobre oceny trafiają na Google Maps, złe wracają prosto do Ciebie.',
+      i3t: 'Strony i menu', i3d: 'Szybkie, czytelne i dopasowane do telefonu.',
+      save: 'Dodaj kontakt do telefonu', saveSub: 'Jedno kliknięcie, wszystkie dane od razu w kontaktach', savedI: 'Stuknij „Dodaj” u góry, żeby zapisać', savedA: 'Otwórz pobrany plik, aby zapisać kontakt',
+      tg: 'Napisz na Telegramie', sms: 'Napisz SMS', call: 'Zadzwoń', svc: 'Moje usługi',
+      smsBody: 'Dzień dobry! Chcę zapytać o wizytówkę NFC / stronę internetową.'
+    },
+    uk: {
+      role: 'Сайти, NFC-візитки, QR-коди',
+      head: 'Один дотик телефоном, і клієнт уже у вас.',
+      sub: 'Роблю NFC-візитки, QR-коди, цифрове меню та сайти, які перетворюють перехожих на клієнтів.',
+      i1t: 'NFC-візитки', i1d: 'Прикладаєте телефон, і контакт, сайт та відгуки відкриваються самі.',
+      i2t: 'QR-коди й відгуки', i2d: 'Хороші оцінки йдуть на Google Maps, погані повертаються прямо до вас.',
+      i3t: 'Сайти й меню', i3d: 'Швидкі, зрозумілі та зручні на телефоні.',
+      save: 'Додати контакт у телефон', saveSub: 'Один клік, і всі дані одразу в контактах', savedI: 'Натисніть «Додати» вгорі, щоб зберегти', savedA: 'Відкрийте завантажений файл, щоб зберегти контакт',
+      tg: 'Написати в Telegram', sms: 'Написати SMS', call: 'Зателефонувати', svc: 'Мої послуги',
+      smsBody: 'Добрий день! Хочу запитати про NFC-візитку / сайт.'
+    },
+    ru: {
+      role: 'Сайты, NFC-визитки, QR-коды',
+      head: 'Одно касание телефоном, и клиент уже у вас.',
+      sub: 'Делаю NFC-визитки, QR-коды, цифровое меню и сайты, которые превращают прохожих в клиентов.',
+      i1t: 'NFC-визитки', i1d: 'Прикладываете телефон, и контакт, сайт и отзывы открываются сами.',
+      i2t: 'QR-коды и отзывы', i2d: 'Хорошие оценки идут на Google Maps, плохие возвращаются прямо к вам.',
+      i3t: 'Сайты и меню', i3d: 'Быстрые, понятные и удобные на телефоне.',
+      save: 'Добавить контакт в телефон', saveSub: 'Один клик, и все данные сразу в контактах', savedI: 'Нажмите «Добавить» вверху, чтобы сохранить', savedA: 'Откройте скачанный файл, чтобы сохранить контакт',
+      tg: 'Написать в Telegram', sms: 'Написать SMS', call: 'Позвонить', svc: 'Мои услуги',
+      smsBody: 'Здравствуйте! Хочу узнать про NFC-визитку / сайт.'
+    },
+    en: {
+      role: 'Websites, NFC cards, QR codes',
+      head: 'One tap of a phone, and the customer is yours.',
+      sub: 'I build NFC business cards, QR codes, digital menus and websites that turn passers-by into customers.',
+      i1t: 'NFC cards', i1d: 'Hold a phone to it and your contact, site and reviews open on their own.',
+      i2t: 'QR and reviews', i2d: 'Good ratings go to Google Maps, bad ones come straight back to you.',
+      i3t: 'Sites and menus', i3d: 'Fast, clear and made for phones.',
+      save: 'Add contact to phone', saveSub: 'One tap, all my details go to your contacts', savedI: 'Tap "Add" at the top to save', savedA: 'Open the downloaded file to save the contact',
+      tg: 'Message on Telegram', sms: 'Send an SMS', call: 'Call me', svc: 'My services',
+      smsBody: 'Hello! I would like to ask about an NFC card / website.'
+    }
+  };
+  var lang = 'pl';
+  var $ = function (s) { return document.querySelector(s); };
+  var isApple = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  function setLang(l) {
+    if (!D[l]) l = 'pl';
+    lang = l;
+    document.documentElement.lang = l === 'uk' ? 'uk' : l;
+    document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = D[l][el.dataset.t]; });
+    document.querySelectorAll('.langs button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.l === l)); });
+    $('#sms').href = 'sms:' + PHONE + (isApple ? '&' : '?') + 'body=' + encodeURIComponent(D[l].smsBody);
+    try { localStorage.setItem('cyryl-card-lang', l); } catch (e) {}
+  }
+  document.querySelectorAll('.langs button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.l); });
+  });
+
+  /* vCard: one tap saves the whole contact */
+  function vcard() {
+    var d = D[lang];
+    return [
+      'BEGIN:VCARD', 'VERSION:3.0',
+      'FN:Cyryl WEBDesign', 'N:WEBDesign;Cyryl;;;',
+      'ORG:WEBDesign', 'TITLE:' + d.role,
+      'TEL;TYPE=CELL,VOICE:' + PHONE,
+      'URL:' + SITE,
+      'URL;TYPE=Telegram:' + TG,
+      'NOTE:Telegram: ' + TG,
+      'END:VCARD'
+    ].join('\r\n');
+  }
+  var save = $('#save');
+  save.addEventListener('click', function () {
+    var blob = new Blob([vcard()], { type: 'text/vcard;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    if (isApple) {
+      window.location.href = url;            // iOS opens "Add contact" directly
+    } else {
+      var a = document.createElement('a');
+      a.href = url; a.download = 'Cyryl-WEBDesign.vcf';
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    var label = save.querySelector('[data-t="save"]');
+    save.classList.add('done');
+    label.textContent = isApple ? D[lang].savedI : D[lang].savedA;
+    setTimeout(function () {
+      save.classList.remove('done');
+      label.textContent = D[lang].save;
+    }, 5000);
+  });
+
+  /* decorative QR on the card */
+  (function () {
+    var N = 9, seed = 7, html = '';
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      var on;
+      if ((r < 3 && c < 3) || (r < 3 && c > 5) || (r > 5 && c < 3)) {
+        on = !(r % 6 % 3 === 1 && c % 6 % 3 === 1);   // finder square with a hole in the middle
+      } else {
+        seed = (seed * 9301 + 49297) % 233280;
+        on = seed / 233280 > 0.5;
+      }
+      html += '<b class="' + (on ? 'on' : '') + '"></b>';
+    }
+    document.getElementById('qr').innerHTML = html;
+  })();
+
+  /* gentle 3D tilt on pointer devices */
+  var card = $('#card');
+  if (window.matchMedia('(hover:hover)').matches && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    card.parentNode.addEventListener('pointermove', function (e) {
+      var b = card.getBoundingClientRect();
+      var x = (e.clientX - b.left) / b.width - .5, y = (e.clientY - b.top) / b.height - .5;
+      card.style.transform = 'rotateY(' + (x * 12) + 'deg) rotateX(' + (-y * 10) + 'deg)';
+    });
+    card.parentNode.addEventListener('pointerleave', function () { card.style.transform = ''; });
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('cyryl-card-lang'); } catch (e) {}
+  setLang(saved && D[saved] ? saved : 'pl');
+})();
+</script>
+</body>
+</html>
