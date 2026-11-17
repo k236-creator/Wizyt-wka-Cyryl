@@ -176,6 +176,20 @@ h1{font-size:clamp(1.22rem,5.4vw,1.55rem);line-height:1.14}
 .btn.site:hover{border-color:transparent;box-shadow:0 0 40px -6px rgba(0,242,254,.9),inset 0 0 26px -8px rgba(0,242,254,.7)}
 @keyframes flow{to{background-position:0 0,300% 0}}
 @media (max-height:640px){.btn.site{min-height:50px}}
+
+/* ---- call / SMS / Telegram: same loud style and colours as the main site ---- */
+#call,#sms,#tg{position:relative;overflow:hidden;border:0;font-weight:800;backdrop-filter:none;-webkit-backdrop-filter:none}
+#call{color:#03210f;background:linear-gradient(135deg,#34f58a,#16c46a);animation:up .7s cubic-bezier(.2,.7,.2,1) backwards,callPulse 2.2s 1.2s infinite;animation-delay:calc(var(--i)*.09s + .05s),1.2s}
+#tg{color:#fff;background:linear-gradient(135deg,#34b9f5,#1a86d8);animation:up .7s cubic-bezier(.2,.7,.2,1) backwards,tgPulse 2.2s infinite;animation-delay:calc(var(--i)*.09s + .05s),1.8s}
+#sms{color:#04181a;background:linear-gradient(135deg,#00f2fe,#4facfe);animation:up .7s cubic-bezier(.2,.7,.2,1) backwards,smsPulse 2.2s infinite;animation-delay:calc(var(--i)*.09s + .05s),1.5s}
+#call:hover,#sms:hover,#tg:hover{border:0;filter:brightness(1.08);transform:translateY(-3px) scale(1.03)}
+#call::after,#sms::after,#tg::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%);transform:translateX(-130%);animation:tileShine 3.4s 1.4s ease-in-out infinite;pointer-events:none}
+#call svg{animation:phoneShake 3s 1.4s infinite}
+@keyframes callPulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.65),0 12px 32px -10px rgba(34,197,94,.9)}70%,100%{box-shadow:0 0 0 16px rgba(34,197,94,0),0 12px 32px -10px rgba(34,197,94,.9)}}
+@keyframes tgPulse{0%{box-shadow:0 0 0 0 rgba(42,171,238,.65),0 12px 32px -10px rgba(42,171,238,.9)}70%,100%{box-shadow:0 0 0 16px rgba(42,171,238,0),0 12px 32px -10px rgba(42,171,238,.9)}}
+@keyframes smsPulse{0%{box-shadow:0 0 0 0 rgba(0,242,254,.65),0 12px 32px -10px rgba(0,242,254,.9)}70%,100%{box-shadow:0 0 0 16px rgba(0,242,254,0),0 12px 32px -10px rgba(0,242,254,.9)}}
+@keyframes tileShine{0%{transform:translateX(-130%)}40%,100%{transform:translateX(130%)}}
+@keyframes phoneShake{0%,60%,100%{transform:none}65%{transform:rotate(-16deg)}70%{transform:rotate(14deg)}75%{transform:rotate(-10deg)}80%{transform:rotate(8deg)}}
 </style>
 </head>
 <body>
